@@ -48,13 +48,12 @@ resource "terraform_data" "main" {
     host     = aws_instance.main.private_ip
   }
 
-  provisioner "remote-exec" {
+ provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/${var.component}.sh",
       "sudo sh /tmp/${var.component}.sh ${var.component} ${var.environment}"
     ]
   }
-
 }
 
 resource "aws_ec2_instance_state" "main" {
